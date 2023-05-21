@@ -51,4 +51,4 @@ jobs:
         with:
           app-name: 'zps-portfolio-web'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0FE96BDF552A4CBCACAF70F6069E6F29 }}
-          package: ./dist/zps-portfolio-web.app
+          package: ./dist/zps-portfolio-web-app
