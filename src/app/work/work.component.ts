@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-work',
   templateUrl: './work.component.html',
-  styleUrls: ['./work.component.scss']
+  styleUrls: ['./work.component.scss'],
 })
-export class WorkComponent {
-
-}
+export class WorkComponent {}
