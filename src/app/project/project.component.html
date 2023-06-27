@@ -1,6 +1,17 @@
 <section class="section">
   <div class="container">
     <h1 class="title">Project Component</h1>
-    <p class="subtitle">Here's an example project</p>
+    <p class="subtitle">
+      Here's an example project showing basic API interaction
+    </p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <h2>Make an API call</h2>
+    <button class="button is-primary is-rounded" (click)="callFunction1()">
+      Call API
+    </button>
+    <p>{{ functionOneResponse$ | async }}</p>
   </div>
 </section>
