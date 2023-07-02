@@ -14,7 +14,7 @@ export class ProjectComponent {
   constructor(private http: HttpClient) {}
 
   public callFunction1(): void {
-    var headers = new HttpHeaders().set('x-functions-key', 'INSERT_KEY');
+    var headers = new HttpHeaders().set('x-functions-key', environment.apiKey);
 
     this.functionOneResponse$ = this.http.get<string>(
       `${environment.apiUrl}/Function1`,
