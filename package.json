@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npm run config && ng build",
+    "config": "ts-node src/environment/set-env.ts",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prepare": "husky install"
@@ -20,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "bulma": "^0.9.4",
+    "dotenv": "^16.3.1",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
     "rxjs": "~7.8.0",
