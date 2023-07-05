@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run config && ng build",
-    "config": "ts-node src/environment/set-env.ts",
+    "build": "ng build",
+    "env-variables": "ts-node src/environment/set-env.ts",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prepare": "husky install"
