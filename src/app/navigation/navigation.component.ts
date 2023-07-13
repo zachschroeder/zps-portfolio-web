@@ -6,10 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent {
+  // Boolean used to toggle .is-active on navbar-burger and navbar-menu
+  isActiveToggle = false;
+
   // Toggles navbar-burger between burger icon and 'x' icon
   // Also shows and hides navbar-menu
   toggleBurgerAndMenu() {
-    document.querySelector('.navbar-burger')?.classList.toggle('is-active');
-    document.querySelector('.navbar-menu')?.classList.toggle('is-active');
+    this.isActiveToggle = !this.isActiveToggle;
   }
 }
