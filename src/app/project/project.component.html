@@ -4,14 +4,44 @@
     <p class="subtitle">
       Here's an example project showing basic API interaction
     </p>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-    <h2>Make an API call</h2>
-    <button class="button is-primary is-rounded" (click)="callFunction1()">
-      Call API
-    </button>
-    <p>{{ functionOneResponse$ | async }}</p>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              <h2 class="is-size-4 is-clearfix">Books</h2>
+            </div>
+            <div class="column is pull">
+              <button
+                class="button is-primary is-rounded is-pulled-right"
+                (click)="getBooks()"
+              >
+                Refresh Books
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="books$ | async as books">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let book of books">
+                  <td>{{ book.title }}</td>
+                  <td>{{ book.author }}</td>
+                  <td>{{ book.id }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
