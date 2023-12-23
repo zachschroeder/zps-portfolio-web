@@ -6,24 +6,26 @@
     </p>
 
     <div class="card">
+      <header class="card-header">
+        <h2 class="card-header-title is-size-4 has-text-weight-medium">
+          Books
+        </h2>
+
+        <button
+          class="button is-primary card-header-icon my-auto mr-2"
+          (click)="getBooks()"
+          title="Refresh"
+        >
+          <span class="icon">
+            <i class="fas fa-arrows-rotate" aria-hidden="true"></i>
+          </span>
+        </button>
+      </header>
+
       <div class="card-content">
         <div class="content">
-          <div class="columns">
-            <div class="column">
-              <h2 class="is-size-4 is-clearfix">Books</h2>
-            </div>
-            <div class="column is pull">
-              <button
-                class="button is-primary is-rounded is-pulled-right"
-                (click)="getBooks()"
-              >
-                Refresh Books
-              </button>
-            </div>
-          </div>
-
           <!-- Loading animation -->
-          <div class="levels">
+          <div class="level">
             <div class="level-item">
               <span *ngIf="isLoading$ | async" class="loader is-size-2"></span>
             </div>
