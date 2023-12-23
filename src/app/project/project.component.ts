@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environment/environment';
 import { Book } from './models/book';
 
@@ -12,6 +12,9 @@ import { Book } from './models/book';
 export class ProjectComponent implements OnInit {
   books$: Observable<Book[]> | undefined;
 
+  isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -19,11 +22,15 @@ export class ProjectComponent implements OnInit {
   }
 
   public getBooks(): void {
+    this.isLoadingSubject.next(true);
+
     var headers = new HttpHeaders().set('x-functions-key', environment.apiKey);
     var url = `${environment.apiUrl}/Books`;
 
-    this.books$ = this.http.get<Book[]>(url, {
-      headers: headers,
-    });
+    this.books$ = this.http
+      .get<Book[]>(url, {
+        headers: headers,
+      })
+      .pipe(tap(() => this.isLoadingSubject.next(false)));
   }
 }
