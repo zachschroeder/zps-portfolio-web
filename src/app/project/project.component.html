@@ -25,9 +25,9 @@
       <div class="card-content">
         <div class="content">
           <!-- Loading animation -->
-          <div class="level">
+          <div *ngIf="isLoading$ | async" class="level">
             <div class="level-item">
-              <span *ngIf="isLoading$ | async" class="loader is-size-2"></span>
+              <span class="loader is-size-2"></span>
             </div>
           </div>
 
