@@ -14,9 +14,6 @@ const setEnv = () => {
     apiKey: '${process.env['API_KEY']}'
   };
   `;
-  console.log(
-    'The file `environment.ts` will be written with the following content: \n'
-  );
   writeFile(targetPath, envConfigFile, (err: any) => {
     if (err) {
       console.error(err);
