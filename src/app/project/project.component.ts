@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { environment } from 'src/environment/environment';
 import { Book } from './models/book';
+import { BookService } from './book.service';
 
 @Component({
   selector: 'app-project',
@@ -15,7 +14,7 @@ export class ProjectComponent implements OnInit {
   isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
     this.getBooks();
@@ -24,13 +23,8 @@ export class ProjectComponent implements OnInit {
   public getBooks(): void {
     this.isLoadingSubject.next(true);
 
-    var headers = new HttpHeaders().set('x-functions-key', environment.apiKey);
-    var url = `${environment.apiUrl}/Books`;
-
-    this.books$ = this.http
-      .get<Book[]>(url, {
-        headers: headers,
-      })
+    this.books$ = this.bookService
+      .getBooks$()
       .pipe(tap(() => this.isLoadingSubject.next(false)));
   }
 }
