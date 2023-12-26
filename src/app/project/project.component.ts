@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Observable, catchError, finalize } from 'rxjs';
 import { Book } from './models/book';
 import { BookService } from './book.service';
 
@@ -11,8 +11,8 @@ import { BookService } from './book.service';
 export class ProjectComponent implements OnInit {
   books$: Observable<Book[]> | undefined;
 
-  isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
+  isLoading = true;
+  shouldShowError: boolean = false;
 
   constructor(private bookService: BookService) {}
 
@@ -21,10 +21,17 @@ export class ProjectComponent implements OnInit {
   }
 
   public getBooks(): void {
-    this.isLoadingSubject.next(true);
+    this.isLoading = true;
+    this.shouldShowError = false;
 
-    this.books$ = this.bookService
-      .getBooks$()
-      .pipe(tap(() => this.isLoadingSubject.next(false)));
+    this.books$ = this.bookService.getBooks$().pipe(
+      catchError(() => {
+        this.shouldShowError = true;
+        return [];
+      }),
+      finalize(() => {
+        this.isLoading = false;
+      })
+    );
   }
 }

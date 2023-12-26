@@ -25,11 +25,22 @@
       <div class="card-content">
         <div class="content">
           <!-- Loading animation -->
-          <div *ngIf="isLoading$ | async" class="level">
+          <div *ngIf="isLoading" class="level">
             <div class="level-item">
               <span class="loader is-size-2"></span>
             </div>
           </div>
+
+          <!-- Error message -->
+          <article class="message is-danger" *ngIf="shouldShowError">
+            <div class="message-header">
+              <p>Error</p>
+            </div>
+            <div class="message-body">
+              Unable to retrieve books. Please try again with the refresh button
+              in the top right.
+            </div>
+          </article>
 
           <div *ngIf="books$ | async as books">
             <table class="table">
