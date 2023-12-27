@@ -11,7 +11,7 @@ import { BookService } from './book.service';
 export class ProjectComponent implements OnInit {
   books$: Observable<Book[]> | undefined;
 
-  isLoading = true;
+  isLoading: boolean = true;
   shouldShowError: boolean = false;
 
   constructor(private bookService: BookService) {}
