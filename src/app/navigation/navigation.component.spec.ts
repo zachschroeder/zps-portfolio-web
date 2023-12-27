@@ -18,4 +18,17 @@ describe('NavigationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('toggleBurgerAndMenu', () => {
+    it('should toggle isActiveToggle', () => {
+      // Arrange
+      component.isActiveToggle = false;
+
+      // Act
+      component.toggleBurgerAndMenu();
+
+      // Assert
+      expect(component.isActiveToggle).toBeTrue();
+    });
+  });
 });
