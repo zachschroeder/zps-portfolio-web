@@ -77,7 +77,7 @@ describe('ProjectComponent', () => {
       component.books$?.subscribe();
 
       // Assert
-      expect(component.shouldShowError).toBeTrue();
+      expect(component.shouldShowGetBooksError).toBeTrue();
     });
   });
 

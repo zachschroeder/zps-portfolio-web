@@ -25,14 +25,14 @@
       <div class="card-content">
         <div class="content">
           <!-- Loading animation -->
-          <div *ngIf="isLoading" class="level">
+          <div *ngIf="isLoadingGetBooks" class="level">
             <div class="level-item">
               <span class="loader is-size-2"></span>
             </div>
           </div>
 
           <!-- Error message -->
-          <article class="message is-danger" *ngIf="shouldShowError">
+          <article class="message is-danger" *ngIf="shouldShowGetBooksError">
             <div class="message-header">
               <p>Error</p>
             </div>
@@ -80,9 +80,10 @@
                 <input
                   class="input form-control"
                   type="text"
-                  [(ngModel)]="addBookModel.title"
                   name="title"
                   id="title"
+                  [(ngModel)]="addBookModel.title"
+                  required
                   placeholder="The Great Gatsby"
                 />
               </div>
@@ -94,9 +95,10 @@
                 <input
                   class="input form-control"
                   type="text"
-                  [(ngModel)]="addBookModel.author"
                   name="author"
                   id="author"
+                  [(ngModel)]="addBookModel.author"
+                  required
                   placeholder="F. Scott Fitzgerald"
                 />
               </div>
@@ -104,12 +106,46 @@
 
             <div class="field is-grouped is-grouped-right">
               <div class="control">
-                <button class="button is-primary" (click)="submitAddBookForm()">
+                <button
+                  class="button is-primary"
+                  [class.is-loading]="isLoadingAddBook"
+                  [disabled]="addBookForm.invalid"
+                  (click)="submitAddBookForm()"
+                >
                   Submit
                 </button>
               </div>
             </div>
           </form>
+
+          <!-- Error message -->
+          <article
+            class="message is-danger mt-5"
+            *ngIf="shouldShowAddBookError"
+          >
+            <div class="message-header">
+              <p class="mb-auto">Error</p>
+              <button class="delete"></button>
+            </div>
+            <div class="message-body">
+              Unable to add book, please try again.
+            </div>
+          </article>
+
+          <!-- Success message -->
+          <article
+            class="message is-success mt-5"
+            *ngIf="shouldShowAddBookSuccess"
+          >
+            <div class="message-header">
+              <p class="mb-auto">Success</p>
+              <button class="delete"></button>
+            </div>
+            <div class="message-body">
+              Successfully added book. To see it in the list above, click the
+              refresh button in the top right.
+            </div>
+          </article>
         </div>
       </div>
     </div>
