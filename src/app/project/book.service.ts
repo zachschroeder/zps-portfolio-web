@@ -24,7 +24,7 @@ export class BookService {
     });
   }
 
-  public addBooks$(book: AddBook): Observable<Book> {
+  public addBook$(book: AddBook): Observable<Book> {
     var url = `${environment.apiUrl}/book`;
 
     return this.http.post<Book>(url, book, {

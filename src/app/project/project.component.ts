@@ -42,6 +42,6 @@ export class ProjectComponent implements OnInit {
   }
 
   submitAddBookForm() {
-    this.bookService.addBooks$(this.addBookModel).subscribe();
+    this.bookService.addBook$(this.addBookModel).subscribe();
   }
 }

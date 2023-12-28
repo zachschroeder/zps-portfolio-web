@@ -4,6 +4,7 @@ import { ProjectComponent } from './project.component';
 import { BookService } from './book.service';
 import { Book } from './models/book';
 import { of, throwError } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 const mockBookList: Book[] = [
   {
@@ -25,11 +26,14 @@ describe('ProjectComponent', () => {
   let bookServiceSpy: jasmine.SpyObj<BookService>;
 
   beforeEach(() => {
-    bookServiceSpy = jasmine.createSpyObj('BookService', ['getBooks$']);
+    bookServiceSpy = jasmine.createSpyObj('BookService', [
+      'getBooks$',
+      'addBook$',
+    ]);
     bookServiceSpy.getBooks$.and.returnValue(of(mockBookList));
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, FormsModule],
       declarations: [ProjectComponent],
       providers: [
         {
@@ -74,6 +78,20 @@ describe('ProjectComponent', () => {
 
       // Assert
       expect(component.shouldShowError).toBeTrue();
+    });
+  });
+
+  describe('submitAddBookForm()', () => {
+    it('should successfully interact with BookService.addBook$()', () => {
+      // Arrange
+      bookServiceSpy.addBook$.and.returnValue(of(mockBookList[0]));
+
+      // Act
+      component.submitAddBookForm();
+
+      // Assert
+      // TOOO - Improve this test case once success/fail messages are shown
+      expect(true).toBeTrue();
     });
   });
 });

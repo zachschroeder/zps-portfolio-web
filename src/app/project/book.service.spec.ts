@@ -4,6 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { Book } from './models/book';
+import { AddBook } from './models/add-book';
 
 const mockBookList: Book[] = [
   {
@@ -23,7 +24,7 @@ describe('BookService', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -50,6 +51,23 @@ describe('BookService', () => {
       service.getBooks$().subscribe((result) => {
         // Assert
         expect(result.length).toEqual(mockBookList.length);
+      });
+    });
+  });
+
+  describe('addBook$()', () => {
+    it('should return an observable of a book', () => {
+      // Arrange
+      httpClientSpy.post.and.returnValue(of(mockBookList[0]));
+      var addBookDto: AddBook = {
+        title: mockBookList[0].title,
+        author: mockBookList[0].author,
+      };
+
+      // Act
+      service.addBook$(addBookDto).subscribe((result) => {
+        // Assert
+        expect(result.title).toEqual(addBookDto.title);
       });
     });
   });
