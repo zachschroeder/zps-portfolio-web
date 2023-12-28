@@ -63,5 +63,55 @@
         </div>
       </div>
     </div>
+
+    <div class="card mt-5">
+      <header class="card-header">
+        <h2 class="card-header-title is-size-4 has-text-weight-medium">
+          Add Book
+        </h2>
+      </header>
+
+      <div class="card-content">
+        <div class="content">
+          <form #addBookForm="ngForm">
+            <div class="field">
+              <label class="label" for="title">Title</label>
+              <div class="control">
+                <input
+                  class="input form-control"
+                  type="text"
+                  [(ngModel)]="addBookModel.title"
+                  name="title"
+                  id="title"
+                  placeholder="The Great Gatsby"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Author</label>
+              <div class="control">
+                <input
+                  class="input form-control"
+                  type="text"
+                  [(ngModel)]="addBookModel.author"
+                  name="author"
+                  id="author"
+                  placeholder="F. Scott Fitzgerald"
+                />
+              </div>
+            </div>
+
+            <div class="field is-grouped is-grouped-right">
+              <div class="control">
+                <button class="button is-primary" (click)="submitAddBookForm()">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

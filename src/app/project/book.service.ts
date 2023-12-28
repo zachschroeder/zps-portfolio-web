@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Book } from './models/book';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment/environment';
+import { AddBook } from './models/add-book';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,14 @@ export class BookService {
     var url = `${environment.apiUrl}/Books`;
 
     return this.http.get<Book[]>(url, {
+      headers: this.headers,
+    });
+  }
+
+  public addBooks$(book: AddBook): Observable<Book> {
+    var url = `${environment.apiUrl}/book`;
+
+    return this.http.post<Book>(url, book, {
       headers: this.headers,
     });
   }

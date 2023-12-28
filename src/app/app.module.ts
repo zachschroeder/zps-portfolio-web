@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { WorkComponent } from './work/work.component';
 import { SchoolComponent } from './school/school.component';
 import { ProjectComponent } from './project/project.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,13 @@ import { ProjectComponent } from './project/project.component';
     SchoolComponent,
     ProjectComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, CommonModule],
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, catchError, finalize } from 'rxjs';
 import { Book } from './models/book';
 import { BookService } from './book.service';
+import { AddBook } from './models/add-book';
 
 @Component({
   selector: 'app-project',
@@ -13,6 +14,11 @@ export class ProjectComponent implements OnInit {
 
   isLoading: boolean = true;
   shouldShowError: boolean = false;
+
+  addBookModel: AddBook = {
+    title: '',
+    author: '',
+  };
 
   constructor(private bookService: BookService) {}
 
@@ -33,5 +39,9 @@ export class ProjectComponent implements OnInit {
         this.isLoading = false;
       })
     );
+  }
+
+  submitAddBookForm() {
+    this.bookService.addBooks$(this.addBookModel).subscribe();
   }
 }
