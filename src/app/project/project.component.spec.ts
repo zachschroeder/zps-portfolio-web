@@ -30,7 +30,6 @@ describe('ProjectComponent', () => {
       'getBooks$',
       'addBook$',
     ]);
-    bookServiceSpy.getBooks$.and.returnValue(of(mockBookList));
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, FormsModule],
@@ -51,13 +50,20 @@ describe('ProjectComponent', () => {
   });
 
   it('should create', () => {
+    // Arrange
+    bookServiceSpy.getBooks$.and.returnValue(of(mockBookList));
+
+    // Act
     component.ngOnInit();
+
+    // Assert
     expect(component).toBeTruthy();
   });
 
   describe('getBooks()', () => {
     it('should emit to books$', () => {
-      // Arranged in beforeEach
+      // Arrange
+      bookServiceSpy.getBooks$.and.returnValue(of(mockBookList));
 
       // Act
       component.getBooks();
@@ -82,7 +88,7 @@ describe('ProjectComponent', () => {
   });
 
   describe('submitAddBookForm()', () => {
-    it('should successfully interact with BookService.addBook$()', () => {
+    it('should show success message on success', () => {
       // Arrange
       bookServiceSpy.addBook$.and.returnValue(of(mockBookList[0]));
 
@@ -90,8 +96,18 @@ describe('ProjectComponent', () => {
       component.submitAddBookForm();
 
       // Assert
-      // TOOO - Improve this test case once success/fail messages are shown
-      expect(true).toBeTrue();
+      expect(component.shouldShowAddBookSuccess).toBeTrue();
+    });
+
+    it('should show error message on error', () => {
+      // Arrange
+      bookServiceSpy.addBook$.and.returnValue(throwError(() => 'API Error'));
+
+      // Act
+      component.submitAddBookForm();
+
+      // Assert
+      expect(component.shouldShowAddBookError).toBeTrue();
     });
   });
 });

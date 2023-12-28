@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, catchError, finalize, tap } from 'rxjs';
+import { EMPTY, Observable, catchError, finalize, tap } from 'rxjs';
 import { Book } from './models/book';
 import { BookService } from './book.service';
 import { AddBook } from './models/add-book';
@@ -56,7 +56,7 @@ export class ProjectComponent implements OnInit {
         tap(() => (this.shouldShowAddBookSuccess = true)),
         catchError(() => {
           this.shouldShowAddBookError = true;
-          return [];
+          return EMPTY;
         }),
         finalize(() => {
           this.isLoadingAddBook = false;
