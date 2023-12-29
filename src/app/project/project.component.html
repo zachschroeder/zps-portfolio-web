@@ -13,12 +13,14 @@
 
         <button
           class="button is-primary card-header-icon my-auto mr-2"
+          [class.is-loading]="isLoadingGetBooks"
           (click)="getBooks()"
           title="Refresh"
         >
           <span class="icon">
             <i class="fas fa-arrows-rotate"></i>
           </span>
+          <span>Reload</span>
         </button>
       </header>
 
@@ -37,7 +39,7 @@
               <p>Error</p>
             </div>
             <div class="message-body">
-              Unable to retrieve books. Please try again with the refresh button
+              Unable to retrieve books. Please try again with the reload button
               in the top right.
             </div>
           </article>
@@ -112,7 +114,10 @@
                   [disabled]="addBookForm.invalid"
                   (click)="submitAddBookForm()"
                 >
-                  Submit
+                  <span class="icon">
+                    <i class="fa fa-check"></i>
+                  </span>
+                  <span>Submit</span>
                 </button>
               </div>
             </div>
@@ -143,7 +148,7 @@
             </div>
             <div class="message-body">
               Successfully added book. To see it in the list above, click the
-              refresh button in the top right.
+              reload button in the top right.
             </div>
           </article>
         </div>
