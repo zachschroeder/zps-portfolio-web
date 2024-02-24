@@ -63,6 +63,9 @@
                     <button
                       class="button is-danger"
                       (click)="deleteBook(book.id)"
+                      [ngClass]="{
+                        'is-loading': book.id == loadingDeleteBookForId
+                      }"
                     >
                       <span class="icon">
                         <i class="fas fa-trash"></i>

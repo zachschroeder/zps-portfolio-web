@@ -24,6 +24,9 @@ export class ProjectComponent implements OnInit {
   shouldShowAddBookError: boolean = false;
   shouldShowAddBookSuccess: boolean = false;
 
+  // Properties for deleteBook()
+  loadingDeleteBookForId: string = '';
+
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
@@ -74,6 +77,11 @@ export class ProjectComponent implements OnInit {
   }
 
   deleteBook(id: string) {
-    this.bookService.deleteBook$(id).subscribe();
+    this.loadingDeleteBookForId = id;
+
+    this.bookService
+      .deleteBook$(id)
+      .pipe(finalize(() => (this.loadingDeleteBookForId = '')))
+      .subscribe();
   }
 }
