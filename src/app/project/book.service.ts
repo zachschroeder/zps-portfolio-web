@@ -31,4 +31,13 @@ export class BookService {
       headers: this.headers,
     });
   }
+
+  public deleteBook$(id: string): Observable<any> {
+    var url = `${environment.apiUrl}/book`;
+
+    return this.http.delete<any>(url, {
+      headers: this.headers,
+      body: `"${id}"`,
+    });
+  }
 }

@@ -72,4 +72,8 @@ export class ProjectComponent implements OnInit {
       title: '',
     };
   }
+
+  deleteBook(id: string) {
+    this.bookService.deleteBook$(id).subscribe();
+  }
 }

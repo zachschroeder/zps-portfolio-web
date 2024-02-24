@@ -15,7 +15,7 @@
           class="button is-primary card-header-icon my-auto mr-2"
           [class.is-loading]="isLoadingGetBooks"
           (click)="getBooks()"
-          title="Refresh"
+          title="Reload"
         >
           <span class="icon">
             <i class="fas fa-arrows-rotate"></i>
@@ -51,6 +51,7 @@
                   <th>Title</th>
                   <th>Author</th>
                   <th class="is-hidden-mobile">ID</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -58,6 +59,16 @@
                   <td>{{ book.title }}</td>
                   <td>{{ book.author }}</td>
                   <td class="is-hidden-mobile">{{ book.id }}</td>
+                  <td>
+                    <button
+                      class="button is-danger"
+                      (click)="deleteBook(book.id)"
+                    >
+                      <span class="icon">
+                        <i class="fas fa-trash"></i>
+                      </span>
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
