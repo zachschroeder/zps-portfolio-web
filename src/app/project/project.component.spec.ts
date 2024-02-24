@@ -29,6 +29,7 @@ describe('ProjectComponent', () => {
     bookServiceSpy = jasmine.createSpyObj('BookService', [
       'getBooks$',
       'addBook$',
+      'deleteBook$',
     ]);
 
     TestBed.configureTestingModule({
@@ -61,7 +62,7 @@ describe('ProjectComponent', () => {
   });
 
   describe('getBooks()', () => {
-    it('should emit to books$', () => {
+    it('should set books', () => {
       // Arrange
       bookServiceSpy.getBooks$.and.returnValue(of(mockBookList));
 
@@ -69,45 +70,65 @@ describe('ProjectComponent', () => {
       component.getBooks();
 
       // Assert
-      component.books$?.subscribe((books) => {
-        expect(books.length).toEqual(mockBookList.length);
-      });
+      expect(component.books.length).toEqual(mockBookList.length);
+      expect(component.books).toContain(mockBookList[0]);
+      expect(component.books).toContain(mockBookList[1]);
     });
 
-    it('should show error message when an error is thrown', () => {
+    it('should show error message on error', () => {
       // Arrange
       bookServiceSpy.getBooks$.and.returnValue(throwError(() => 'API Error'));
 
       // Act
       component.getBooks();
-      component.books$?.subscribe();
 
       // Assert
       expect(component.shouldShowGetBooksError).toBeTrue();
     });
   });
 
-  describe('submitAddBookForm()', () => {
-    it('should show success message on success', () => {
+  describe('addBook()', () => {
+    it('should show add book to books array and show success message on success', () => {
       // Arrange
       bookServiceSpy.addBook$.and.returnValue(of(mockBookList[0]));
 
       // Act
-      component.submitAddBookForm();
+      component.addBook();
 
       // Assert
+      expect(component.books).toContain(mockBookList[0]);
       expect(component.shouldShowAddBookSuccess).toBeTrue();
     });
 
-    it('should show error message on error', () => {
+    it('should show not add book to books array and show error message on error', () => {
       // Arrange
       bookServiceSpy.addBook$.and.returnValue(throwError(() => 'API Error'));
 
       // Act
-      component.submitAddBookForm();
+      component.addBook();
 
       // Assert
+      expect(component.books).not.toContain(mockBookList[0]);
       expect(component.shouldShowAddBookError).toBeTrue();
+    });
+  });
+
+  describe('deleteBook()', () => {
+    it('should remove book from books array', () => {
+      // Arrange
+      component.books = mockBookList;
+
+      bookServiceSpy.deleteBook$.and.returnValue(of(true));
+
+      // Act
+      component.deleteBook(mockBookList[0].id);
+
+      // Assert
+      expect(component.books.length).toBe(1);
+      expect(component.books.map((b) => b.id)).not.toContain(
+        mockBookList[0].id
+      );
+      expect(component.books.map((b) => b.id)).toContain(mockBookList[1].id);
     });
   });
 });

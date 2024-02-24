@@ -24,7 +24,11 @@ describe('BookService', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', [
+      'get',
+      'post',
+      'delete',
+    ]);
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -68,6 +72,19 @@ describe('BookService', () => {
       service.addBook$(addBookDto).subscribe((result) => {
         // Assert
         expect(result.title).toEqual(addBookDto.title);
+      });
+    });
+  });
+
+  describe('deleteBook$()', () => {
+    it('should return response', () => {
+      // Arrange
+      httpClientSpy.delete.and.returnValue(of(null)); // Request returns a 204 No Content
+
+      // Act
+      service.deleteBook$(mockBookList[0].id).subscribe((result) => {
+        // Assert
+        expect(result).toEqual(null);
       });
     });
   });

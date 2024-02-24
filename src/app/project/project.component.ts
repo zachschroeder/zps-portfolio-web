@@ -52,7 +52,7 @@ export class ProjectComponent implements OnInit {
       .subscribe((res) => (this.books = res)); // No need to unsubscribe, BookService.getBooks$() will complete the pipeline
   }
 
-  submitAddBookForm() {
+  addBook() {
     this.isLoadingAddBook = true;
     this.shouldShowAddBookError = false;
     this.shouldShowAddBookSuccess = false;
@@ -89,8 +89,7 @@ export class ProjectComponent implements OnInit {
       .deleteBook$(id)
       .pipe(finalize(() => (this.loadingDeleteBookForId = '')))
       .subscribe(() => {
-        // No need to unsubscribe, BookService.deleteBook$() will complete the pipeline
         this.books = this.books.filter((b) => b.id != id);
-      });
+      }); // No need to unsubscribe, BookService.deleteBook$() will complete the pipeline
   }
 }

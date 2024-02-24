@@ -126,7 +126,7 @@
                   class="button is-primary"
                   [class.is-loading]="isLoadingAddBook"
                   [disabled]="addBookForm.invalid"
-                  (click)="submitAddBookForm()"
+                  (click)="addBook()"
                 >
                   <span class="icon">
                     <i class="fa fa-check"></i>
@@ -144,7 +144,10 @@
           >
             <div class="message-header">
               <p class="mb-auto">Error</p>
-              <button class="delete"></button>
+              <button
+                class="delete"
+                (click)="shouldShowAddBookError = false"
+              ></button>
             </div>
             <div class="message-body">
               Unable to add book, please try again.
@@ -158,10 +161,13 @@
           >
             <div class="message-header">
               <p class="mb-auto">Success</p>
-              <button class="delete"></button>
+              <button
+                class="delete"
+                (click)="shouldShowAddBookSuccess = false"
+              ></button>
             </div>
             <div class="message-body">
-              Book successfully added, please view the list above.
+              Book successfully added to the list above.
             </div>
           </article>
         </div>
