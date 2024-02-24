@@ -44,7 +44,7 @@
             </div>
           </article>
 
-          <div *ngIf="books$ | async as books">
+          <div *ngIf="books.length > 0">
             <table class="table">
               <thead>
                 <tr>
@@ -161,8 +161,7 @@
               <button class="delete"></button>
             </div>
             <div class="message-body">
-              Successfully added book. To see it in the list above, click the
-              reload button in the top right.
+              Book successfully added, please view the list above.
             </div>
           </article>
         </div>

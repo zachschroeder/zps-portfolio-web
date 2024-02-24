@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EMPTY, Observable, catchError, finalize, tap } from 'rxjs';
+import { EMPTY, catchError, finalize, tap } from 'rxjs';
 import { Book } from './models/book';
 import { BookService } from './book.service';
 import { AddBook } from './models/add-book';
@@ -11,7 +11,7 @@ import { AddBook } from './models/add-book';
 })
 export class ProjectComponent implements OnInit {
   // Properties for getBooks()
-  books$: Observable<Book[]> | undefined;
+  books: Book[] = [];
   isLoadingGetBooks: boolean = true;
   shouldShowGetBooksError: boolean = false;
 
@@ -34,18 +34,22 @@ export class ProjectComponent implements OnInit {
   }
 
   public getBooks(): void {
+    this.books = [];
     this.isLoadingGetBooks = true;
     this.shouldShowGetBooksError = false;
 
-    this.books$ = this.bookService.getBooks$().pipe(
-      catchError(() => {
-        this.shouldShowGetBooksError = true;
-        return [];
-      }),
-      finalize(() => {
-        this.isLoadingGetBooks = false;
-      })
-    );
+    this.bookService
+      .getBooks$()
+      .pipe(
+        catchError(() => {
+          this.shouldShowGetBooksError = true;
+          return [];
+        }),
+        finalize(() => {
+          this.isLoadingGetBooks = false;
+        })
+      )
+      .subscribe((res) => (this.books = res)); // No need to unsubscribe, BookService.getBooks$() will complete the pipeline
   }
 
   submitAddBookForm() {
@@ -66,7 +70,9 @@ export class ProjectComponent implements OnInit {
           this.clearAddBookForm();
         })
       )
-      .subscribe(); // BookService.addBooks$() uses http.post which completes the rxjs pipeline. There is no need to unsubscribe
+      .subscribe((res) =>
+        this.books.push({ id: res.id, title: res.title, author: res.author })
+      ); // No need to unsubscribe, BookService.addBook$() will complete the pipeline
   }
 
   clearAddBookForm() {
@@ -82,6 +88,9 @@ export class ProjectComponent implements OnInit {
     this.bookService
       .deleteBook$(id)
       .pipe(finalize(() => (this.loadingDeleteBookForId = '')))
-      .subscribe();
+      .subscribe(() => {
+        // No need to unsubscribe, BookService.deleteBook$() will complete the pipeline
+        this.books = this.books.filter((b) => b.id != id);
+      });
   }
 }
