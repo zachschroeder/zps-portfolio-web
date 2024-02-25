@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Book } from './models/book';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment/environment';
-import { AddBook } from './models/add-book';
+import { AddBook, Book, DeleteBook } from './book-models';
 
 @Injectable({
   providedIn: 'root',
@@ -32,12 +31,12 @@ export class BookService {
     });
   }
 
-  public deleteBook$(id: string): Observable<any> {
+  public deleteBook$(deleteBook: DeleteBook): Observable<any> {
     var url = `${environment.apiUrl}/book`;
 
     return this.http.delete<any>(url, {
       headers: this.headers,
-      body: `"${id}"`,
+      body: deleteBook,
     });
   }
 }

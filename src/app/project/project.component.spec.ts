@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ProjectComponent } from './project.component';
 import { BookService } from './book.service';
-import { Book } from './models/book';
+import { Book } from './book-models';
 import { of, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 

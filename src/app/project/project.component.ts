@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EMPTY, catchError, finalize, tap } from 'rxjs';
-import { Book } from './models/book';
 import { BookService } from './book.service';
-import { AddBook } from './models/add-book';
+import { AddBook, Book, DeleteBook } from './book-models';
 
 @Component({
   selector: 'app-project',
@@ -84,9 +83,10 @@ export class ProjectComponent implements OnInit {
 
   deleteBook(id: string) {
     this.loadingDeleteBookForId = id;
+    var deleteBook: DeleteBook = { id: id };
 
     this.bookService
-      .deleteBook$(id)
+      .deleteBook$(deleteBook)
       .pipe(finalize(() => (this.loadingDeleteBookForId = '')))
       .subscribe(() => {
         this.books = this.books.filter((b) => b.id != id);
