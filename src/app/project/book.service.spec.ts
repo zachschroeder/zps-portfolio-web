@@ -3,8 +3,7 @@ import { BookService } from './book.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
-import { Book } from './models/book';
-import { AddBook } from './models/add-book';
+import { AddBook, Book } from './book-models';
 
 const mockBookList: Book[] = [
   {
@@ -82,7 +81,7 @@ describe('BookService', () => {
       httpClientSpy.delete.and.returnValue(of(null)); // Request returns a 204 No Content
 
       // Act
-      service.deleteBook$(mockBookList[0].id).subscribe((result) => {
+      service.deleteBook$(mockBookList[0]).subscribe((result) => {
         // Assert
         expect(result).toEqual(null);
       });
