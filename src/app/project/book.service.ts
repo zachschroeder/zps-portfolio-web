@@ -24,6 +24,9 @@ export class BookService {
   }
 
   public addBook$(book: AddBook): Observable<Book> {
+    book.title = book.title.trim();
+    book.author = book.author.trim();
+
     var url = `${environment.apiUrl}/book`;
 
     return this.http.post<Book>(url, book, {
