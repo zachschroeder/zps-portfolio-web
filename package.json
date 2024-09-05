@@ -20,7 +20,7 @@
     "@angular/platform-browser": "^17.0.8",
     "@angular/platform-browser-dynamic": "^17.0.8",
     "@angular/router": "^17.0.8",
-    "bulma": "^0.9.4",
+    "bulma": "^1.0.0",
     "dotenv": "^16.3.1",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
