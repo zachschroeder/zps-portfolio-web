@@ -14,9 +14,7 @@
 
       <div class="card-content">
         <div class="content">
-
-          Here is a list of movies
-
+          {{ service.movieList$ | async | json }}
         </div>
       </div>
     </div>
