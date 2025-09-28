@@ -10,10 +10,10 @@ const mockMovieListResponse: MovieListResponse = {
     {
       id: '1',
       title: 'Christoper Nolan',
-      director: 'The Dark Knight'
-    }
-  ]
-}
+      director: 'The Dark Knight',
+    },
+  ],
+};
 
 describe('MoviesService', () => {
   let service: MoviesService;
@@ -24,9 +24,9 @@ describe('MoviesService', () => {
       providers: [
         {
           provide: HttpClient,
-          useValue: httpClientSpy
-        }
-      ]
+          useValue: httpClientSpy,
+        },
+      ],
     });
     service = TestBed.inject(MoviesService);
   });
@@ -40,10 +40,11 @@ describe('MoviesService', () => {
     httpClientSpy.get.and.returnValue(of(mockMovieListResponse));
 
     // Assert
-    service.movieList$.subscribe(res => expect(res).toBe(mockMovieListResponse.movie_list));
+    service.movieList$.subscribe((res) =>
+      expect(res).toBe(mockMovieListResponse.movie_list)
+    );
 
     // Act
     service.fetchMovieList();
-  })
-
+  });
 });

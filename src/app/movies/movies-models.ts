@@ -7,4 +7,4 @@ export type Movie = {
 export type MovieListResponse = {
   status_code: string;
   movie_list: Movie[];
-}
+};

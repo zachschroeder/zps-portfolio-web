@@ -13,12 +13,11 @@ describe('MoviesComponent', () => {
       providers: [
         {
           provide: MoviesService,
-          useValue: mockService
-        }
-      ]
-    })
-    .compileComponents();
-    
+          useValue: mockService,
+        },
+      ],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(MoviesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

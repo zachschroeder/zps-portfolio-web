@@ -7,7 +7,7 @@ import { MoviesService } from './movies.service';
   standalone: true,
   imports: [AsyncPipe, JsonPipe],
   templateUrl: './movies.component.html',
-  styleUrl: './movies.component.scss'
+  styleUrl: './movies.component.scss',
 })
 export class MoviesComponent implements OnInit {
   service = inject(MoviesService);
@@ -15,5 +15,4 @@ export class MoviesComponent implements OnInit {
   ngOnInit(): void {
     this.service.fetchMovieList();
   }
-
 }
