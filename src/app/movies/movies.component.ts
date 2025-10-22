@@ -1,11 +1,11 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { MoviesService } from './movies.service';
 
 @Component({
   selector: 'app-movies',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe],
+  imports: [AsyncPipe, NgForOf, NgIf],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss',
 })

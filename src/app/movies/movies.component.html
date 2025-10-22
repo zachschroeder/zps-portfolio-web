@@ -12,7 +12,23 @@
 
       <div class="card-content">
         <div class="content">
-          {{ service.movieList$ | async | json }}
+          <table class="table" *ngIf="service.movieList$ | async as movies">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Director</th>
+                <th class="is-hidden-mobile">ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let movie of movies">
+                <td>{{ movie.title }}</td>
+                <td>{{ movie.director }}</td>
+                <td class="is-hidden-mobile">{{ movie.id }}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
