@@ -8,11 +8,29 @@
         <h2 class="card-header-title is-size-4 has-text-weight-medium">
           Movies
         </h2>
+        <button
+          class="button is-primary card-header-icon my-auto mr-2"
+          [class.is-loading]="isLoadingGetMovies"
+          (click)="getMovies()"
+          title="Reload"
+        >
+          <span class="icon">
+            <i class="fas fa-arrows-rotate"></i>
+          </span>
+          <span>Reload</span>
+        </button>
       </header>
 
       <div class="card-content">
         <div class="content">
-          <table class="table" *ngIf="service.movieList$ | async as movies">
+          <!-- Loading animation -->
+          <div *ngIf="isLoadingGetMovies" class="level">
+            <div class="level-item">
+              <span class="loader is-size-2"></span>
+            </div>
+          </div>
+
+          <table class="table" *ngIf="movies.length > 0">
             <thead>
               <tr>
                 <th>Title</th>
