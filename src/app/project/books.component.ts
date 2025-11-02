@@ -5,10 +5,10 @@ import { AddBook, Book, DeleteBook } from './book-models';
 
 @Component({
   selector: 'app-project',
-  templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss'],
+  templateUrl: './books.component.html',
+  styleUrls: ['./books.component.scss'],
 })
-export class ProjectComponent implements OnInit {
+export class BooksComponent implements OnInit {
   // Properties for getBooks()
   books: Book[] = [];
   isLoadingGetBooks: boolean = true;

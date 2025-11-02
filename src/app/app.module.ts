@@ -9,7 +9,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { WorkComponent } from './work/work.component';
 import { SchoolComponent } from './school/school.component';
-import { ProjectComponent } from './project/project.component';
+import { BooksComponent } from './project/books.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     WorkComponent,
     SchoolComponent,
-    ProjectComponent,
+    BooksComponent,
   ],
   imports: [
     AppRoutingModule,

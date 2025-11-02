@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ProjectComponent } from './project.component';
+import { BooksComponent } from './books.component';
 import { BookService } from './book.service';
 import { Book } from './book-models';
 import { of, throwError } from 'rxjs';
@@ -20,8 +20,8 @@ const mockBookList: Book[] = [
 ];
 
 describe('ProjectComponent', () => {
-  let component: ProjectComponent;
-  let fixture: ComponentFixture<ProjectComponent>;
+  let component: BooksComponent;
+  let fixture: ComponentFixture<BooksComponent>;
 
   let bookServiceSpy: jasmine.SpyObj<BookService>;
 
@@ -34,7 +34,7 @@ describe('ProjectComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, FormsModule],
-      declarations: [ProjectComponent],
+      declarations: [BooksComponent],
       providers: [
         {
           provide: BookService,
@@ -42,7 +42,7 @@ describe('ProjectComponent', () => {
         },
       ],
     });
-    fixture = TestBed.createComponent(ProjectComponent);
+    fixture = TestBed.createComponent(BooksComponent);
     component = fixture.componentInstance;
 
     // If detectChanges() is run, this error is thrown: ExpressionChangedAfterItHasBeenCheckedError
