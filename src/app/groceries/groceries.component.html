@@ -27,14 +27,33 @@
               />
             </div>
 
-            <button
-              (click)="add(itemInput, section.name, itemInput.value)"
-              hidden
-            ></button>
+            <button (click)="addItem(itemInput, section.name)" hidden></button>
           </form>
         </div>
       </div>
     </div>
     }
+
+    <!--  Add Section  -->
+    <div class="card mt-5">
+      <div class="card-content">
+        <div class="content">
+          <form>
+            <div class="field is-grouped">
+              <p class="control is-expanded">
+                <input class="input" #sectionInput placeholder="Add section" />
+              </p>
+
+              <button
+                class="button is-primary"
+                (click)="addSection(sectionInput)"
+              >
+                Add
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

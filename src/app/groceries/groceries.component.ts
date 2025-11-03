@@ -18,12 +18,17 @@ export class GroceriesComponent {
     ];
   }
 
-  add(inputTag: HTMLInputElement, section: string, item: string) {
-    if (section.trim() === '' || item.trim() === '') return;
+  addItem(inputElement: HTMLInputElement, section: string) {
+    if (inputElement.value === '' || section.trim() === '') return;
 
-    if (inputTag) inputTag.value = '';
+    this.dayState.addItem(section, inputElement.value);
 
-    this.dayState.addItem(section, item);
+    inputElement.value = '';
+  }
+
+  addSection(inputTag: HTMLInputElement) {
+    this.dayState.sections.push(new Section(inputTag.value, []));
+    inputTag.value = '';
   }
 }
 
