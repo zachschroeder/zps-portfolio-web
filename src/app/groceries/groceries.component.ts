@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GroceryItemComponent } from './grocery-item/grocery-item.component';
 
@@ -27,9 +27,11 @@ export class GroceriesComponent {
     inputElement.value = '';
   }
 
-  addSection(inputTag: HTMLInputElement) {
-    this.dayState.sections.push(new Section(inputTag.value, []));
-    inputTag.value = '';
+  addSection(inputElement: HTMLInputElement) {
+    if (inputElement.value === '') return;
+
+    this.dayState.sections.push(new Section(inputElement.value, []));
+    inputElement.value = '';
   }
 }
 
