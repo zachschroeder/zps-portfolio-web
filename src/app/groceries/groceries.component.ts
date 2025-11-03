@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { GroceryItemComponent } from './grocery-item/grocery-item.component';
 
 @Component({
   selector: 'app-groceries',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, GroceryItemComponent],
   templateUrl: './groceries.component.html',
   styleUrl: './groceries.component.scss',
 })

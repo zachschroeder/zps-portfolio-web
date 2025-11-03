@@ -12,11 +12,9 @@
 
       <div class="card-content">
         <div class="content">
-          <ul>
-            @for (item of section.items; track item) {
-            <li>{{ item }}</li>
-            }
-          </ul>
+          @for (item of section.items; track item) {
+          <app-grocery-item [name]="item" />
+          }
 
           <form>
             <div class="control">
