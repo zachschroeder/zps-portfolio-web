@@ -18,10 +18,8 @@ export class GroceriesComponent {
     ];
   }
 
-  add(section: string, item: string) {
-    console.log(section);
-    console.log(item);
-
+  add($event: any, section: string, item: string) {
+    $event.explicitOriginalTarget.value = ''; // Reset input field
     this.dayState.addItem(section, item);
   }
 }
