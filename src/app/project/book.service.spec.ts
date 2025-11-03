@@ -1,7 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { BookService } from './book.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {
+  HttpClient,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { of } from 'rxjs';
 import { AddBook, Book } from './book-models';
 
@@ -30,12 +34,14 @@ describe('BookService', () => {
     ]);
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [],
       providers: [
         {
           provide: HttpClient,
           useValue: httpClientSpy,
         },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
       ],
     });
     service = TestBed.inject(BookService);

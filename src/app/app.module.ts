@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -21,14 +23,8 @@ import { FormsModule } from '@angular/forms';
     SchoolComponent,
     BooksComponent,
   ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    CommonModule,
-    FormsModule,
-    HttpClientModule,
-  ],
-  providers: [],
   bootstrap: [AppComponent],
+  imports: [AppRoutingModule, BrowserModule, CommonModule, FormsModule],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class AppModule {}

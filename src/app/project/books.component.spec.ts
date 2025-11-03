@@ -1,5 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { BooksComponent } from './books.component';
 import { BookService } from './book.service';
 import { Book } from './book-models';
@@ -33,13 +37,15 @@ describe('ProjectComponent', () => {
     ]);
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, FormsModule],
       declarations: [BooksComponent],
+      imports: [FormsModule],
       providers: [
         {
           provide: BookService,
           useValue: bookServiceSpy,
         },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
       ],
     });
     fixture = TestBed.createComponent(BooksComponent);
