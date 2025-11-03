@@ -1,1 +1,40 @@
-<p>groceries works!</p>
+<section class="section">
+  <div class="container">
+    <h1 class="title">Grocery List</h1>
+
+    @for (section of dayState.sections; track section) {
+    <div class="card mt-5">
+      <header class="card-header">
+        <h2 class="card-header-title is-size-4 has-text-weight-medium">
+          {{ section.name }}
+        </h2>
+      </header>
+
+      <div class="card-content">
+        <div class="content">
+          <ul>
+            @for (item of section.items; track item) {
+            <li>{{ item }}</li>
+            }
+          </ul>
+
+          <form>
+            <div class="control">
+              <input
+                class="input form-control"
+                #itemInput
+                placeholder="Add item"
+              />
+            </div>
+
+            <button
+              (click)="add(section.name, itemInput.value)"
+              hidden
+            ></button>
+          </form>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</section>
