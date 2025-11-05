@@ -1,10 +1,9 @@
-import { NgForOf, NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { MoviesService } from './movies.service';
 
 @Component({
   selector: 'app-movies',
-  imports: [NgForOf, NgIf],
+  imports: [],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss',
 })

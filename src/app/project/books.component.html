@@ -25,14 +25,17 @@
       <div class="card-content">
         <div class="content">
           <!-- Loading animation -->
-          <div *ngIf="isLoadingGetBooks" class="level">
+          @if (isLoadingGetBooks) {
+          <div class="level">
             <div class="level-item">
               <span class="loader is-size-2"></span>
             </div>
           </div>
+          }
 
           <!-- Error message -->
-          <article class="message is-danger" *ngIf="shouldShowGetBooksError">
+          @if (shouldShowGetBooksError) {
+          <article class="message is-danger">
             <div class="message-header">
               <p>Error</p>
             </div>
@@ -41,8 +44,8 @@
               in the top right.
             </div>
           </article>
-
-          <div *ngIf="books.length > 0">
+          } @if (books.length > 0) {
+          <div>
             <table class="table">
               <thead>
                 <tr>
@@ -53,7 +56,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let book of books">
+                @for (book of books; track book) {
+                <tr>
                   <td>{{ book.title }}</td>
                   <td>{{ book.author }}</td>
                   <td class="is-hidden-mobile">{{ book.id }}</td>
@@ -71,9 +75,11 @@
                     </button>
                   </td>
                 </tr>
+                }
               </tbody>
             </table>
           </div>
+          }
         </div>
       </div>
     </div>
@@ -136,10 +142,8 @@
           </form>
 
           <!-- Error message -->
-          <article
-            class="message is-danger mt-5"
-            *ngIf="shouldShowAddBookError"
-          >
+          @if (shouldShowAddBookError) {
+          <article class="message is-danger mt-5">
             <div class="message-header">
               <p class="mb-auto">Error</p>
               <button
@@ -151,12 +155,11 @@
               Unable to add book, please try again.
             </div>
           </article>
+          }
 
           <!-- Success message -->
-          <article
-            class="message is-success mt-5"
-            *ngIf="shouldShowAddBookSuccess"
-          >
+          @if (shouldShowAddBookSuccess) {
+          <article class="message is-success mt-5">
             <div class="message-header">
               <p class="mb-auto">Success</p>
               <button
@@ -168,6 +171,7 @@
               Book successfully added to the list above.
             </div>
           </article>
+          }
         </div>
       </div>
     </div>
