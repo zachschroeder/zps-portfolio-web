@@ -7,6 +7,7 @@ import { AddBook, Book, DeleteBook } from './book-models';
   selector: 'app-project',
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.scss'],
+  standalone: false,
 })
 export class BooksComponent implements OnInit {
   // Properties for getBooks()

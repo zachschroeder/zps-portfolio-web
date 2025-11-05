@@ -35,16 +35,14 @@ describe('MoviesService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('fetchMovieList should emit to movieList$', () => {
+  it('fetchMovieList() should return movie_list', () => {
     // Arrange
     httpClientSpy.get.and.returnValue(of(mockMovieListResponse));
 
-    // Assert
-    service.movieList$.subscribe((res) =>
-      expect(res).toBe(mockMovieListResponse.movie_list)
-    );
-
     // Act
-    service.fetchMovieList();
+    service.fetchMovieList().subscribe((res) => {
+      // Assert
+      expect(res).toBe(mockMovieListResponse.movie_list);
+    });
   });
 });

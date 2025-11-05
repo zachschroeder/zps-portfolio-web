@@ -4,7 +4,6 @@ import { GroceryItemComponent } from './grocery-item/grocery-item.component';
 
 @Component({
   selector: 'app-groceries',
-  standalone: true,
   imports: [FormsModule, GroceryItemComponent],
   templateUrl: './groceries.component.html',
   styleUrl: './groceries.component.scss',

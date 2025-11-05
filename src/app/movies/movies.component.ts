@@ -4,7 +4,6 @@ import { MoviesService } from './movies.service';
 
 @Component({
   selector: 'app-movies',
-  standalone: true,
   imports: [NgForOf, NgIf],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss',

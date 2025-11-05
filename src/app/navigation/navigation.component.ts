@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
+  standalone: false,
 })
 export class NavigationComponent {
   // Boolean used to toggle .is-active on navbar-burger and navbar-menu

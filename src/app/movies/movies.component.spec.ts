@@ -1,11 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MoviesComponent } from './movies.component';
 import { MoviesService } from './movies.service';
+import { of } from 'rxjs';
+import { Movie } from './movies-models';
 
 describe('MoviesComponent', () => {
   let component: MoviesComponent;
   let fixture: ComponentFixture<MoviesComponent>;
   let mockService = jasmine.createSpyObj('MoviesService', ['fetchMovieList']);
+
+  let mockMovieList: Movie[] = [
+    {
+      id: '1',
+      title: 'The Movie',
+      director: 'Mr. Director',
+    },
+  ];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,6 +28,8 @@ describe('MoviesComponent', () => {
       ],
     }).compileComponents();
 
+    mockService.fetchMovieList.and.returnValue(of(mockMovieList));
+
     fixture = TestBed.createComponent(MoviesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -27,8 +39,9 @@ describe('MoviesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call fetchMovieList on init', () => {
+  it('should set movies property with value from service onInit', () => {
     // Assert
     expect(mockService.fetchMovieList).toHaveBeenCalled();
+    expect(component.movies).toEqual(mockMovieList);
   });
 });
