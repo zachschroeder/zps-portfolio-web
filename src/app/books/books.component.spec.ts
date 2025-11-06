@@ -23,7 +23,7 @@ const mockBookList: Book[] = [
   },
 ];
 
-describe('ProjectComponent', () => {
+describe('BooksComponent', () => {
   let component: BooksComponent;
   let fixture: ComponentFixture<BooksComponent>;
 
@@ -37,8 +37,7 @@ describe('ProjectComponent', () => {
     ]);
 
     TestBed.configureTestingModule({
-      declarations: [BooksComponent],
-      imports: [FormsModule],
+      imports: [BooksComponent, FormsModule],
       providers: [
         {
           provide: BookService,
@@ -47,7 +46,7 @@ describe('ProjectComponent', () => {
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],
-    });
+    }).compileComponents();
     fixture = TestBed.createComponent(BooksComponent);
     component = fixture.componentInstance;
 

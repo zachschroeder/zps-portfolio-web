@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { EMPTY, catchError, finalize, tap } from 'rxjs';
+import { catchError, EMPTY, finalize, tap } from 'rxjs';
 import { BookService } from './book.service';
 import { AddBook, Book, DeleteBook } from './book-models';
+import { NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-project',
+  selector: 'app-books',
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.scss'],
-  standalone: false,
+  imports: [NgClass, FormsModule],
 })
 export class BooksComponent implements OnInit {
   // Properties for getBooks()

@@ -6,9 +6,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [AppComponent, NavigationComponent],
-    })
+      imports: [AppComponent, NavigationComponent],
+    }).compileComponents()
   );
 
   it('should create the app', () => {
