@@ -4,11 +4,7 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import {
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
-import { of } from 'rxjs';
+import { provideHttpClient } from '@angular/common/http';
 import { AddBook, Book, DeleteBook } from './book-models';
 
 const mockBookList: Book[] = [
