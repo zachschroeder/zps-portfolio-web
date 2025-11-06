@@ -16,7 +16,7 @@ export class BookService {
   constructor(private http: HttpClient) {}
 
   public getBooks$(): Observable<Book[]> {
-    var url = `${environment.apiUrl}Books`;
+    var url = `${environment.apiUrl}/Books`;
 
     return this.http.get<Book[]>(url, {
       headers: this.headers,
