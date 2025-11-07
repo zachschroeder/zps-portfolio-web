@@ -1,24 +1,19 @@
 <div class="level is-mobile py-1">
-  <div>
-    <p>{{ name }}</p>
+  <div class="is-grouped">
+    <label>
+      <input type="checkbox" [(ngModel)]="isChecked" />
+      <span [class.strikethrough]="isChecked" class="pl-2">
+        {{ name }}
+      </span>
+    </label>
   </div>
 
   <!--  Buttons -->
-  <div class="field is-grouped buttons are-small">
-    <p class="control">
-      <button class="button is-success is-small">
-        <span class="icon">
-          <i class="fas fa-check"></i>
-        </span>
-      </button>
-    </p>
-
-    <p class="control">
-      <button class="button is-danger">
-        <span class="icon">
-          <i class="fas fa-trash"></i>
-        </span>
-      </button>
-    </p>
-  </div>
+  <p class="control">
+    <button class="button is-danger is-small">
+      <span class="icon">
+        <i class="fas fa-trash"></i>
+      </span>
+    </button>
+  </p>
 </div>
