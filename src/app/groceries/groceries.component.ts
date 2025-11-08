@@ -16,6 +16,10 @@ export class GroceriesComponent {
     this.dayState.setMockState();
   }
 
+  refresh() {
+    this.dayState.setMockState();
+  }
+
   addItem(inputElement: HTMLInputElement, section: Section) {
     if (inputElement.value === '' || section == null) return;
 

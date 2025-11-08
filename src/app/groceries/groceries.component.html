@@ -1,6 +1,13 @@
 <section class="section">
   <div class="container">
-    <h1 class="title">Grocery List</h1>
+    <div class="columns is-mobile">
+      <div class="column">
+        <h1 class="title">Grocery List</h1>
+      </div>
+      <div class="column is-narrow has-text-right">
+        <button class="button is-primary" (click)="refresh()">Refresh</button>
+      </div>
+    </div>
 
     @for (section of dayState.sections; track section) {
     <div class="card mt-5">
