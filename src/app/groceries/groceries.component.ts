@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GroceryItemComponent } from './grocery-item/grocery-item.component';
-import { GroceryItem, Section, State } from './models/grocery-models';
+import { GroceryItem, Section, State, ViewType } from './models/grocery-models';
 
 @Component({
   selector: 'app-groceries',
@@ -10,18 +10,18 @@ import { GroceryItem, Section, State } from './models/grocery-models';
   styleUrl: './groceries.component.scss',
 })
 export class GroceriesComponent {
-  mealState: State = new State();
-  storeState: State = new State();
+  mealState: State = new State(ViewType.Meal);
+  storeState: State = new State(ViewType.Store);
   selectedState = this.mealState;
   isMealViewSelected: boolean = true;
 
   constructor() {
-    this.mealState.setMockState();
+    this.refresh();
   }
 
   refresh() {
-    this.mealState.setMockState();
-    this.storeState.sections = [];
+    this.mealState.refresh();
+    this.storeState.refresh();
   }
 
   addItem(inputElement: HTMLInputElement, section: Section) {
