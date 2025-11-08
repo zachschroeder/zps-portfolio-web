@@ -13,7 +13,10 @@
       <div class="card-content">
         <div class="content">
           @for (item of section.items; track item) {
-          <app-grocery-item [groceryItem]="item" />
+          <app-grocery-item
+            [groceryItem]="item"
+            (itemChecked)="handleItemChecked(section, $event)"
+          />
           }
 
           <form>

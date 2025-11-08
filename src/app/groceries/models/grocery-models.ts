@@ -11,13 +11,13 @@ export class State {
   setMockState() {
     this.sections = [
       new Section('Monday', [
-        new GroceryItem('Chicken', true),
-        new GroceryItem('Cheese'),
-        new GroceryItem('Bread', true),
+        new GroceryItem(crypto.randomUUID().toString(), 'Chicken'),
+        new GroceryItem(crypto.randomUUID().toString(), 'Bread'),
+        new GroceryItem(crypto.randomUUID().toString(), 'Cheese', true),
       ]),
       new Section('Breakfast', [
-        new GroceryItem('Yogurt'),
-        new GroceryItem('Granola'),
+        new GroceryItem(crypto.randomUUID().toString(), 'Yogurt'),
+        new GroceryItem(crypto.randomUUID().toString(), 'Granola', true),
       ]),
     ];
   }
@@ -34,10 +34,12 @@ export class Section {
 }
 
 export class GroceryItem {
+  id: string;
   name: string;
   isChecked: boolean;
 
-  constructor(name: string, isChecked: boolean = false) {
+  constructor(id: string, name: string, isChecked: boolean = false) {
+    this.id = id;
     this.name = name;
     this.isChecked = isChecked;
   }

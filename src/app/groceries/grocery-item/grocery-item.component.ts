@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GroceryItem } from '../models/grocery-models';
 
@@ -9,5 +9,10 @@ import { GroceryItem } from '../models/grocery-models';
   styleUrl: './grocery-item.component.scss',
 })
 export class GroceryItemComponent {
-  @Input({ required: true }) groceryItem!: GroceryItem;
+  groceryItem = input.required<GroceryItem>();
+  itemChecked = output<GroceryItem>();
+
+  handleItemChecked(item: GroceryItem) {
+    this.itemChecked.emit(item);
+  }
 }

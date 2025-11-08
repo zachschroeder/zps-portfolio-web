@@ -19,7 +19,10 @@ export class GroceriesComponent {
   addItem(inputElement: HTMLInputElement, section: string) {
     if (inputElement.value === '' || section.trim() === '') return;
 
-    const newItem = new GroceryItem(inputElement.value);
+    const newItem = new GroceryItem(
+      crypto.randomUUID().toString(),
+      inputElement.value
+    );
 
     this.dayState.addItem(section, newItem);
 
@@ -31,5 +34,11 @@ export class GroceriesComponent {
 
     this.dayState.sections.push(new Section(inputElement.value, []));
     inputElement.value = '';
+  }
+
+  handleItemChecked(section: Section, item: GroceryItem) {
+    console.log(
+      `${item.id} ${item.name} set to ${item.isChecked} in ${section.name}`
+    );
   }
 }
