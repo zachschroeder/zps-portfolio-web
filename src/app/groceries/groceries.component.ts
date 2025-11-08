@@ -10,15 +10,18 @@ import { GroceryItem, Section, State } from './models/grocery-models';
   styleUrl: './groceries.component.scss',
 })
 export class GroceriesComponent {
-  dayState: State = new State();
+  mealState: State = new State();
+  storeState: State = new State();
+  selectedState = this.mealState;
   isMealViewSelected: boolean = true;
 
   constructor() {
-    this.dayState.setMockState();
+    this.mealState.setMockState();
   }
 
   refresh() {
-    this.dayState.setMockState();
+    this.mealState.setMockState();
+    this.storeState.sections = [];
   }
 
   addItem(inputElement: HTMLInputElement, section: Section) {
@@ -29,7 +32,7 @@ export class GroceriesComponent {
       inputElement.value
     );
 
-    this.dayState.addItem(section, newItem);
+    this.selectedState.addItem(section, newItem);
 
     inputElement.value = '';
   }
@@ -37,7 +40,7 @@ export class GroceriesComponent {
   addSection(inputElement: HTMLInputElement) {
     if (inputElement.value === '') return;
 
-    this.dayState.sections.push(new Section(inputElement.value, []));
+    this.selectedState.sections.push(new Section(inputElement.value, []));
     inputElement.value = '';
   }
 
@@ -48,14 +51,16 @@ export class GroceriesComponent {
   }
 
   handleItemDeleted(section: Section, item: GroceryItem) {
-    this.dayState.deleteItem(section, item);
+    this.selectedState.deleteItem(section, item);
   }
 
   selectMealView() {
     this.isMealViewSelected = true;
+    this.selectedState = this.mealState;
   }
 
   selectStoreView() {
     this.isMealViewSelected = false;
+    this.selectedState = this.storeState;
   }
 }
