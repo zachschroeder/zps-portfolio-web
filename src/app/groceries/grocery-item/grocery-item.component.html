@@ -1,9 +1,9 @@
 <div class="level is-mobile py-1">
   <div class="is-grouped">
     <label>
-      <input type="checkbox" [(ngModel)]="isChecked" />
-      <span [class.strikethrough]="isChecked" class="pl-2">
-        {{ name }}
+      <input type="checkbox" [(ngModel)]="groceryItem.isChecked" />
+      <span [class.strikethrough]="groceryItem.isChecked" class="pl-2">
+        {{ groceryItem.name }}
       </span>
     </label>
   </div>

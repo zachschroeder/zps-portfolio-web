@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GroceryItemComponent } from './grocery-item/grocery-item.component';
+import { GroceryItem, Section, State } from './models/grocery-models';
 
 @Component({
   selector: 'app-groceries',
@@ -9,19 +10,18 @@ import { GroceryItemComponent } from './grocery-item/grocery-item.component';
   styleUrl: './groceries.component.scss',
 })
 export class GroceriesComponent {
-  dayState: DayState = new DayState();
+  dayState: State = new State();
 
   constructor() {
-    this.dayState.sections = [
-      new Section('Monday', ['Chicken', 'Cheese', 'Bread']),
-      new Section('Breakfast', ['Yogurt', 'Granola']),
-    ];
+    this.dayState.setMockState();
   }
 
   addItem(inputElement: HTMLInputElement, section: string) {
     if (inputElement.value === '' || section.trim() === '') return;
 
-    this.dayState.addItem(section, inputElement.value);
+    const newItem = new GroceryItem(inputElement.value);
+
+    this.dayState.addItem(section, newItem);
 
     inputElement.value = '';
   }
@@ -31,26 +31,5 @@ export class GroceriesComponent {
 
     this.dayState.sections.push(new Section(inputElement.value, []));
     inputElement.value = '';
-  }
-}
-
-export class DayState {
-  sections: Section[] = [];
-
-  addItem(section: string, item: string) {
-    const sectionIndex = this.sections.findIndex((s) => s.name === section);
-    if (sectionIndex !== -1) {
-      this.sections[sectionIndex].items.push(item);
-    }
-  }
-}
-
-export class Section {
-  name: string;
-  items: string[];
-
-  constructor(name: string, items: string[]) {
-    this.name = name;
-    this.items = items;
   }
 }
