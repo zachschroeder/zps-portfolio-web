@@ -1,5 +1,6 @@
 <section class="section">
   <div class="container">
+    <!--  Title and Refresh  -->
     <div class="columns is-mobile">
       <div class="column">
         <h1 class="title">Grocery List</h1>
@@ -9,6 +10,25 @@
       </div>
     </div>
 
+    <!--  View Selection  -->
+    <div class="buttons has-addons is-centered">
+      <button
+        class="button"
+        [class.is-active]="isMealViewSelected"
+        (click)="selectMealView()"
+      >
+        Meal View
+      </button>
+      <button
+        class="button"
+        [class.is-active]="!isMealViewSelected"
+        (click)="selectStoreView()"
+      >
+        Store View
+      </button>
+    </div>
+
+    <!--  Sections  -->
     @for (section of dayState.sections; track section) {
     <div class="card mt-5">
       <header class="card-header">

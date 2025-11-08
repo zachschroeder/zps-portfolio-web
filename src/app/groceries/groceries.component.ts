@@ -11,6 +11,7 @@ import { GroceryItem, Section, State } from './models/grocery-models';
 })
 export class GroceriesComponent {
   dayState: State = new State();
+  isMealViewSelected: boolean = true;
 
   constructor() {
     this.dayState.setMockState();
@@ -48,5 +49,13 @@ export class GroceriesComponent {
 
   handleItemDeleted(section: Section, item: GroceryItem) {
     this.dayState.deleteItem(section, item);
+  }
+
+  selectMealView() {
+    this.isMealViewSelected = true;
+  }
+
+  selectStoreView() {
+    this.isMealViewSelected = false;
   }
 }
