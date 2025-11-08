@@ -11,8 +11,13 @@ import { GroceryItem } from '../models/grocery-models';
 export class GroceryItemComponent {
   groceryItem = input.required<GroceryItem>();
   itemChecked = output<GroceryItem>();
+  itemDeleted = output<GroceryItem>();
 
   handleItemChecked(item: GroceryItem) {
     this.itemChecked.emit(item);
+  }
+
+  handleItemDeleted(item: GroceryItem) {
+    this.itemDeleted.emit(item);
   }
 }

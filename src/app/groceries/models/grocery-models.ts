@@ -1,11 +1,12 @@
 export class State {
   sections: Section[] = [];
 
-  addItem(section: string, item: GroceryItem) {
-    const sectionIndex = this.sections.findIndex((s) => s.name === section);
-    if (sectionIndex !== -1) {
-      this.sections[sectionIndex].items.push(item);
-    }
+  addItem(section: Section, item: GroceryItem) {
+    section.items.push(item);
+  }
+
+  deleteItem(section: Section, item: GroceryItem) {
+    section.items.splice(section.items.indexOf(item), 1);
   }
 
   setMockState() {

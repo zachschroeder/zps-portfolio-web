@@ -16,8 +16,8 @@ export class GroceriesComponent {
     this.dayState.setMockState();
   }
 
-  addItem(inputElement: HTMLInputElement, section: string) {
-    if (inputElement.value === '' || section.trim() === '') return;
+  addItem(inputElement: HTMLInputElement, section: Section) {
+    if (inputElement.value === '' || section == null) return;
 
     const newItem = new GroceryItem(
       crypto.randomUUID().toString(),
@@ -40,5 +40,9 @@ export class GroceriesComponent {
     console.log(
       `${item.id} ${item.name} set to ${item.isChecked} in ${section.name}`
     );
+  }
+
+  handleItemDeleted(section: Section, item: GroceryItem) {
+    this.dayState.deleteItem(section, item);
   }
 }

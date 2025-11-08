@@ -16,6 +16,7 @@
           <app-grocery-item
             [groceryItem]="item"
             (itemChecked)="handleItemChecked(section, $event)"
+            (itemDeleted)="handleItemDeleted(section, $event)"
           />
           }
 
@@ -28,7 +29,7 @@
               />
             </div>
 
-            <button (click)="addItem(itemInput, section.name)" hidden></button>
+            <button (click)="addItem(itemInput, section)" hidden></button>
           </form>
         </div>
       </div>
