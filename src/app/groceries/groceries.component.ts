@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GroceryItemComponent } from './grocery-item/grocery-item.component';
-import { GroceryItem, Section, State, ViewType } from './models/grocery-models';
+import { GroceryItem, Section } from './models/grocery-models';
+import { GroceryState } from './models/grocery-state';
 
 @Component({
   selector: 'app-groceries',
@@ -10,18 +11,14 @@ import { GroceryItem, Section, State, ViewType } from './models/grocery-models';
   styleUrl: './groceries.component.scss',
 })
 export class GroceriesComponent {
-  mealState: State = new State(ViewType.Meal);
-  storeState: State = new State(ViewType.Store);
-  selectedState = this.mealState;
-  isMealViewSelected: boolean = true;
+  state = new GroceryState();
 
   constructor() {
-    this.refresh();
+    this.state.refresh();
   }
 
   refresh() {
-    this.mealState.refresh();
-    this.storeState.refresh();
+    this.state.refresh();
   }
 
   addItem(inputElement: HTMLInputElement, section: Section) {
@@ -32,7 +29,7 @@ export class GroceriesComponent {
       inputElement.value
     );
 
-    this.selectedState.addItem(section, newItem);
+    this.state.addItem(section, newItem);
 
     inputElement.value = '';
   }
@@ -40,7 +37,8 @@ export class GroceriesComponent {
   addSection(inputElement: HTMLInputElement) {
     if (inputElement.value === '') return;
 
-    this.selectedState.sections.push(new Section(inputElement.value, []));
+    this.state.addSection(inputElement.value);
+
     inputElement.value = '';
   }
 
@@ -51,16 +49,6 @@ export class GroceriesComponent {
   }
 
   handleItemDeleted(section: Section, item: GroceryItem) {
-    this.selectedState.deleteItem(section, item);
-  }
-
-  selectMealView() {
-    this.isMealViewSelected = true;
-    this.selectedState = this.mealState;
-  }
-
-  selectStoreView() {
-    this.isMealViewSelected = false;
-    this.selectedState = this.storeState;
+    this.state.deleteItem(section, item);
   }
 }
