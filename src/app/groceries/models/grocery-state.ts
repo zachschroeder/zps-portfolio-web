@@ -15,8 +15,9 @@ export class GroceryState {
     section.items.push(item);
   }
 
-  deleteItem(section: Section, item: GroceryItem) {
-    section.items.splice(section.items.indexOf(item), 1);
+  deleteItem(item: GroceryItem) {
+    this.mealView.deleteItem(item);
+    this.storeView.deleteItem(item);
   }
 
   refresh() {

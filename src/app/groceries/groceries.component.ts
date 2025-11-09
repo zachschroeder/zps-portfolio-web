@@ -48,7 +48,7 @@ export class GroceriesComponent {
     );
   }
 
-  handleItemDeleted(section: Section, item: GroceryItem) {
-    this.state.deleteItem(section, item);
+  handleItemDeleted(item: GroceryItem) {
+    this.state.deleteItem(item);
   }
 }

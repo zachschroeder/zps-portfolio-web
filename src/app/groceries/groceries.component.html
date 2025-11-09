@@ -43,7 +43,7 @@
           <app-grocery-item
             [groceryItem]="item"
             (itemChecked)="handleItemChecked(section, $event)"
-            (itemDeleted)="handleItemDeleted(section, $event)"
+            (itemDeleted)="handleItemDeleted($event)"
           />
           }
 

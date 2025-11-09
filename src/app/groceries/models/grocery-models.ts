@@ -5,6 +5,17 @@ export class GroceryView {
   constructor(viewType: ViewType) {
     this.viewType = viewType;
   }
+
+  deleteItem(item: GroceryItem) {
+    for (const section of this.sections) {
+      const itemIndex = section.items.indexOf(item);
+
+      if (itemIndex >= 0) {
+        section.items.splice(itemIndex, 1);
+        return;
+      }
+    }
+  }
 }
 
 export class Section {
