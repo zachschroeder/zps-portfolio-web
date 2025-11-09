@@ -15,11 +15,10 @@ export class State {
   }
 
   refresh() {
-    if (this.viewType === ViewType.Meal) this.setMockState(this.viewType);
-    else if (this.viewType === ViewType.Store) this.setMockState(this.viewType);
+    this.setMockState();
   }
 
-  setMockState(viewType: ViewType) {
+  setMockState() {
     const mockItems: GroceryItem[] = [
       new GroceryItem(crypto.randomUUID().toString(), 'Chicken'),
       new GroceryItem(crypto.randomUUID().toString(), 'Bread'),
