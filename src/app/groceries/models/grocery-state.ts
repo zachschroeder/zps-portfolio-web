@@ -28,7 +28,7 @@ export class GroceryState {
 
   private deleteItemFromView(item: GroceryItem, view: GroceryView) {
     for (const section of view.sections) {
-      const itemIndex = section.items.indexOf(item);
+      const itemIndex = section.items.findIndex((i) => i.id === item.id);
 
       if (itemIndex >= 0) {
         section.items.splice(itemIndex, 1);
