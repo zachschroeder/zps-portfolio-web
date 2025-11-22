@@ -9,11 +9,18 @@ export class GroceryStateDto {
 }
 
 export class AddGroceryItemDto {
+  id: string;
   name: string;
   mealSection: string;
   storeSection: string;
 
-  constructor(name: string, mealSection: string, storeSection: string) {
+  constructor(
+    id: string,
+    name: string,
+    mealSection: string,
+    storeSection: string
+  ) {
+    this.id = id;
     this.name = name;
     this.mealSection = mealSection;
     this.storeSection = storeSection;

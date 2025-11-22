@@ -25,8 +25,9 @@ export class GroceryState {
   addItem(section: Section, item: GroceryItem) {
     let addItemDto: AddGroceryItemDto;
     if (this.isMealViewSelected())
-      addItemDto = new AddGroceryItemDto(item.name, section.name, '');
-    else addItemDto = new AddGroceryItemDto(item.name, '', section.name);
+      addItemDto = new AddGroceryItemDto(item.id, item.name, section.name, '');
+    else
+      addItemDto = new AddGroceryItemDto(item.id, item.name, '', section.name);
 
     this.service.addGroceryItem$(addItemDto).subscribe();
 
