@@ -42,10 +42,8 @@ export class GroceriesComponent {
     inputElement.value = '';
   }
 
-  handleItemChecked(section: Section, item: GroceryItem) {
-    console.log(
-      `${item.id} ${item.name} set to ${item.isChecked} in ${section.name}`
-    );
+  handleItemChecked(item: GroceryItem) {
+    this.state.checkItem(item);
   }
 
   handleItemDeleted(item: GroceryItem) {

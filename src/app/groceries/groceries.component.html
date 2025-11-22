@@ -42,7 +42,7 @@
           @for (item of section.items; track item) {
           <app-grocery-item
             [groceryItem]="item"
-            (itemChecked)="handleItemChecked(section, $event)"
+            (itemChecked)="handleItemChecked($event)"
             (itemDeleted)="handleItemDeleted($event)"
           />
           }

@@ -7,7 +7,6 @@ export class GroceryState {
 
   mealView = signal(new GroceryView(ViewType.Meal));
   storeView = signal(new GroceryView(ViewType.Store));
-
   isMealViewSelected = signal(true);
   selectedView = computed(() =>
     this.isMealViewSelected() ? this.mealView() : this.storeView()
@@ -32,6 +31,22 @@ export class GroceryState {
 
       if (itemIndex >= 0) {
         section.items.splice(itemIndex, 1);
+        return;
+      }
+    }
+  }
+
+  checkItem(item: GroceryItem) {
+    this.checkItemInView(item, this.mealView());
+    this.checkItemInView(item, this.storeView());
+  }
+
+  private checkItemInView(item: GroceryItem, view: GroceryView) {
+    for (const section of view.sections) {
+      const foundItem = section.items.find((i) => i.id === item.id);
+
+      if (foundItem) {
+        foundItem.isChecked = true;
         return;
       }
     }
