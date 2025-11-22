@@ -1,14 +1,20 @@
 import { GroceryItem, GroceryView, Section, ViewType } from './grocery-models';
+import { GroceriesService } from '../groceries.service';
+import { computed, inject, signal } from '@angular/core';
 
 export class GroceryState {
-  mealView = new GroceryView(ViewType.Meal);
-  storeView = new GroceryView(ViewType.Store);
+  private service = inject(GroceriesService);
 
-  selectedView = this.mealView;
-  isMealViewSelected = true;
+  mealView = signal(new GroceryView(ViewType.Meal));
+  storeView = signal(new GroceryView(ViewType.Store));
+
+  isMealViewSelected = signal(true);
+  selectedView = computed(() =>
+    this.isMealViewSelected() ? this.mealView() : this.storeView()
+  );
 
   addSection(sectionName: string) {
-    this.selectedView.sections.push(new Section(sectionName, []));
+    this.selectedView().sections.push(new Section(sectionName, []));
   }
 
   addItem(section: Section, item: GroceryItem) {
@@ -16,41 +22,33 @@ export class GroceryState {
   }
 
   deleteItem(item: GroceryItem) {
-    this.mealView.deleteItem(item);
-    this.storeView.deleteItem(item);
+    this.deleteItemFromView(item, this.mealView());
+    this.deleteItemFromView(item, this.storeView());
+  }
+
+  private deleteItemFromView(item: GroceryItem, view: GroceryView) {
+    for (const section of view.sections) {
+      const itemIndex = section.items.indexOf(item);
+
+      if (itemIndex >= 0) {
+        section.items.splice(itemIndex, 1);
+        return;
+      }
+    }
   }
 
   refresh() {
-    this.setMockState();
+    this.service.getGroceries$().subscribe((groceries) => {
+      this.mealView.set(groceries.mealView);
+      this.storeView.set(groceries.storeView);
+    });
   }
 
   selectMealView() {
-    this.isMealViewSelected = true;
-    this.selectedView = this.mealView;
+    this.isMealViewSelected.set(true);
   }
 
   selectStoreView() {
-    this.isMealViewSelected = false;
-    this.selectedView = this.storeView;
-  }
-
-  setMockState() {
-    const mockItems: GroceryItem[] = [
-      new GroceryItem(crypto.randomUUID().toString(), 'Chicken'),
-      new GroceryItem(crypto.randomUUID().toString(), 'Bread'),
-      new GroceryItem(crypto.randomUUID().toString(), 'Cheese', true),
-      new GroceryItem(crypto.randomUUID().toString(), 'Yogurt'),
-      new GroceryItem(crypto.randomUUID().toString(), 'Granola', true),
-    ];
-
-    this.mealView.sections = [
-      new Section('Monday', [mockItems[0], mockItems[1], mockItems[2]]),
-      new Section('Breakfast', [mockItems[3], mockItems[4]]),
-    ];
-    this.storeView.sections = [
-      new Section('Deli', [mockItems[0]]),
-      new Section('Grains', [mockItems[1], mockItems[4]]),
-      new Section('Dairy', [mockItems[2], mockItems[3]]),
-    ];
+    this.isMealViewSelected.set(false);
   }
 }

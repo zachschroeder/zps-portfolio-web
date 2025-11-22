@@ -1,20 +1,20 @@
-export class GroceryView {
-  sections: Section[] = [];
-  viewType: ViewType;
+export class GroceryStateDto {
+  mealView: GroceryView;
+  storeView: GroceryView;
 
-  constructor(viewType: ViewType) {
-    this.viewType = viewType;
+  constructor(mealView: GroceryView, storeView: GroceryView) {
+    this.mealView = mealView;
+    this.storeView = storeView;
   }
+}
 
-  deleteItem(item: GroceryItem) {
-    for (const section of this.sections) {
-      const itemIndex = section.items.indexOf(item);
+export class GroceryView {
+  viewType: ViewType;
+  sections: Section[];
 
-      if (itemIndex >= 0) {
-        section.items.splice(itemIndex, 1);
-        return;
-      }
-    }
+  constructor(viewType: ViewType, sections: Section[] = []) {
+    this.viewType = viewType;
+    this.sections = sections;
   }
 }
 

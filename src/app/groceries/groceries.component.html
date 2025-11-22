@@ -14,14 +14,14 @@
     <div class="buttons has-addons is-centered">
       <button
         class="button"
-        [class.is-active]="state.isMealViewSelected"
+        [class.is-active]="state.isMealViewSelected()"
         (click)="state.selectMealView()"
       >
         Meal View
       </button>
       <button
         class="button"
-        [class.is-active]="!state.isMealViewSelected"
+        [class.is-active]="!state.isMealViewSelected()"
         (click)="state.selectStoreView()"
       >
         Store View
@@ -29,7 +29,7 @@
     </div>
 
     <!--  Sections  -->
-    @for (section of state.selectedView.sections; track section) {
+    @for (section of state.selectedView().sections; track section) {
     <div class="card mt-5">
       <header class="card-header">
         <h2 class="card-header-title is-size-4 has-text-weight-medium">
