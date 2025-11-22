@@ -1,4 +1,10 @@
-import { GroceryItem, GroceryView, Section, ViewType } from './grocery-models';
+import {
+  AddGroceryItemDto,
+  GroceryItem,
+  GroceryView,
+  Section,
+  ViewType,
+} from './grocery-models';
 import { GroceriesService } from '../groceries.service';
 import { computed, inject, signal } from '@angular/core';
 
@@ -17,6 +23,13 @@ export class GroceryState {
   }
 
   addItem(section: Section, item: GroceryItem) {
+    let addItemDto: AddGroceryItemDto;
+    if (this.isMealViewSelected())
+      addItemDto = new AddGroceryItemDto(item.name, section.name, '');
+    else addItemDto = new AddGroceryItemDto(item.name, '', section.name);
+
+    this.service.addGroceryItem$(addItemDto).subscribe();
+
     section.items.push(item);
   }
 

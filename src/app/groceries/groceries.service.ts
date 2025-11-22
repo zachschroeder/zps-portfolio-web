@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environment/environment';
 import { map } from 'rxjs';
 import {
+  AddGroceryItemDto,
   GroceryStateDto,
   GroceryView,
   ViewType,
@@ -40,5 +41,15 @@ export class GroceriesService {
           return new GroceryStateDto(mealView, storeView);
         })
       );
+  }
+
+  public addGroceryItem$(addItemDto: AddGroceryItemDto) {
+    const url = `${environment.apiUrl}/grocery-item`;
+
+    console.log(this.headers);
+
+    return this.http.post<GroceryStateDto>(url, addItemDto, {
+      headers: this.headers,
+    });
   }
 }

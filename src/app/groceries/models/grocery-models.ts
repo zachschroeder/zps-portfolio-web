@@ -8,6 +8,18 @@ export class GroceryStateDto {
   }
 }
 
+export class AddGroceryItemDto {
+  name: string;
+  mealSection: string;
+  storeSection: string;
+
+  constructor(name: string, mealSection: string, storeSection: string) {
+    this.name = name;
+    this.mealSection = mealSection;
+    this.storeSection = storeSection;
+  }
+}
+
 export class GroceryView {
   viewType: ViewType;
   sections: Section[];
