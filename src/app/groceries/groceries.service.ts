@@ -4,6 +4,7 @@ import { environment } from '../../environment/environment';
 import { map } from 'rxjs';
 import {
   AddGroceryItemDto,
+  DeleteGroceryItemDto,
   GroceryStateDto,
   GroceryView,
   ViewType,
@@ -46,10 +47,17 @@ export class GroceriesService {
   public addGroceryItem$(addItemDto: AddGroceryItemDto) {
     const url = `${environment.apiUrl}/grocery-item`;
 
-    console.log(this.headers);
-
     return this.http.post<GroceryStateDto>(url, addItemDto, {
       headers: this.headers,
+    });
+  }
+
+  public deleteGroceryItem$(deleteItemDto: DeleteGroceryItemDto) {
+    const url = `${environment.apiUrl}/grocery-item`;
+
+    return this.http.delete(url, {
+      headers: this.headers,
+      body: deleteItemDto,
     });
   }
 }

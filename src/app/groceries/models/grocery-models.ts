@@ -27,6 +27,14 @@ export class AddGroceryItemDto {
   }
 }
 
+export class DeleteGroceryItemDto {
+  id: string;
+
+  constructor(id: string) {
+    this.id = id;
+  }
+}
+
 export class GroceryView {
   viewType: ViewType;
   sections: Section[];

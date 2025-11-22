@@ -1,5 +1,6 @@
 import {
   AddGroceryItemDto,
+  DeleteGroceryItemDto,
   GroceryItem,
   GroceryView,
   Section,
@@ -35,6 +36,10 @@ export class GroceryState {
   }
 
   deleteItem(item: GroceryItem) {
+    this.service
+      .deleteGroceryItem$(new DeleteGroceryItemDto(item.id))
+      .subscribe();
+
     this.deleteItemFromView(item, this.mealView());
     this.deleteItemFromView(item, this.storeView());
   }
