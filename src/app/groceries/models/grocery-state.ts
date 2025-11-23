@@ -1,5 +1,6 @@
 import {
   AddGroceryItemDto,
+  CheckGroceryItemDto,
   DeleteGroceryItemDto,
   GroceryItem,
   GroceryView,
@@ -57,6 +58,10 @@ export class GroceryState {
   }
 
   checkItem(item: GroceryItem) {
+    this.service
+      .checkGroceryItem$(new CheckGroceryItemDto(item.id, item.isChecked))
+      .subscribe();
+
     this.checkItemInView(item, this.mealView());
     this.checkItemInView(item, this.storeView());
   }
@@ -66,7 +71,7 @@ export class GroceryState {
       const foundItem = section.items.find((i) => i.id === item.id);
 
       if (foundItem) {
-        foundItem.isChecked = true;
+        foundItem.isChecked = item.isChecked;
         return;
       }
     }

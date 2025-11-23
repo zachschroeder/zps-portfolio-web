@@ -35,6 +35,16 @@ export class DeleteGroceryItemDto {
   }
 }
 
+export class CheckGroceryItemDto {
+  id: string;
+  isChecked: boolean;
+
+  constructor(id: string, isChecked: boolean) {
+    this.id = id;
+    this.isChecked = isChecked;
+  }
+}
+
 export class GroceryView {
   viewType: ViewType;
   sections: Section[];
