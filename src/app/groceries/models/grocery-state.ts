@@ -18,6 +18,7 @@ export class GroceryState {
   selectedView = computed(() =>
     this.isMealViewSelected() ? this.mealView() : this.storeView()
   );
+  isLoading = signal(true);
 
   addSection(sectionName: string) {
     this.selectedView().sections.push(new Section(sectionName, []));
@@ -72,9 +73,11 @@ export class GroceryState {
   }
 
   refresh() {
+    this.isLoading.set(true);
     this.service.getGroceries$().subscribe((groceries) => {
       this.mealView.set(groceries.mealView);
       this.storeView.set(groceries.storeView);
+      this.isLoading.set(false);
     });
   }
 
