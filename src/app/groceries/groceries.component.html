@@ -44,7 +44,10 @@
       </header>
 
       <div class="card-content">
-        <div class="content">
+        <div
+          class="content"
+          [class.reduced-top-margin]="section.items.length > 0"
+        >
           @for (item of section.items; track item) {
           <app-grocery-item
             [groceryItem]="item"
