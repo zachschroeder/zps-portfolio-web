@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GroceryItemComponent } from './grocery-item/grocery-item.component';
@@ -6,11 +7,12 @@ import { GroceryState } from './models/grocery-state';
 
 @Component({
   selector: 'app-groceries',
-  imports: [FormsModule, GroceryItemComponent],
+  imports: [CommonModule, FormsModule, GroceryItemComponent],
   templateUrl: './groceries.component.html',
   styleUrl: './groceries.component.scss',
 })
 export class GroceriesComponent {
+  isModalOpen: boolean = false;
   state = new GroceryState();
 
   constructor() {
@@ -48,5 +50,18 @@ export class GroceriesComponent {
 
   handleItemDeleted(item: GroceryItem) {
     this.state.deleteItem(item);
+  }
+
+  deleteConfirmed(): void {
+    this.state.deleteAllGroceries();
+    this.closeModal();
+  }
+
+  openModal(): void {
+    this.isModalOpen = true;
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
   }
 }
