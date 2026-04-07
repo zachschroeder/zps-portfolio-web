@@ -93,4 +93,10 @@ export class GroceryState {
   selectStoreView() {
     this.isMealViewSelected.set(false);
   }
+
+  deleteAllGroceries() {
+    this.service.deleteAllGroceries$().subscribe();
+    this.mealView.set(new GroceryView(ViewType.Meal));
+    this.storeView.set(new GroceryView(ViewType.Store));
+  }
 }

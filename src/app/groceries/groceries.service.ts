@@ -69,4 +69,10 @@ export class GroceriesService {
       headers: this.headers,
     });
   }
+
+  public deleteAllGroceries$() {
+    const url = `${environment.apiUrl}/groceries`;
+
+    return this.http.delete(url, { headers: this.headers });
+  }
 }
