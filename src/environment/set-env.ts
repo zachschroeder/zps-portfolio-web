@@ -11,7 +11,6 @@ const setEnv = () => {
   // `environment.ts` file structure
   const envConfigFile = `export const environment = {
     apiUrl: '${process.env['API_URL']}',
-    apiKey: '${process.env['API_KEY']}'
   };
   `;
   writeFile(targetPath, envConfigFile, (err: any) => {
